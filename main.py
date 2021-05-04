@@ -1,7 +1,10 @@
-import lier_points as lp
-import trace_graphe as g
+'''
+Executer le programme avec n le nombre de points voulu
+'''
+from Programme import trace_graphe as g, lier_points as lp
+import sys
 if '__main__' == __name__:
-    n = 15
+    n = int(sys.argv[-1])
     x,y = g.creer_pt(n)
     coord = lp.coord_pt(x,y)
-    lp.algo(coord)
+    lp.tracer_liens(coord)
