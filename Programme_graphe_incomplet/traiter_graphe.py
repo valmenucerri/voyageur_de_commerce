@@ -42,6 +42,7 @@ def analyser_graphe(graphe,N):
                 couple3 = int(ligne1[2])
                 if 0 <= couple1 <= N and 0 <= couple2 <= N:
                     L[couple1].append((couple2,couple3))
+                    L[couple2].append((couple1, couple3))
 
             elif len(ligne1) == 0:  # Ne pas considérer les lignes vides
                 pass

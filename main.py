@@ -10,7 +10,8 @@ if '__main__' == __name__:
     coord = lp.coord_pt(x,y)
     lp.tracer_liens(coord)
     '''
-    graphe = gr.recup_fichier(sys.argv)
+    #graphe = gr.recup_fichier(sys.argv)
+    graphe = "exemple10.net"
     N = gr.nbr_noeud(graphe)
     L = gr.analyser_graphe(graphe,N)
     parcours = lp2.parcourir_graphe(L,N)

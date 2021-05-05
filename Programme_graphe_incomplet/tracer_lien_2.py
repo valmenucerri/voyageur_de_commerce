@@ -1,9 +1,14 @@
 from copy import deepcopy
 
-def petit_cout(liste):
+def petit_cout(liste,ancien):
     cout = []
     for i in liste:
-        cout.append(i[1])
+        if i[0] != ancien:
+            cout.append(i[1])
+        else:
+            cout.append(99999)
+    if cout == []:
+        return ancien
     petit = min(cout)
     petit_cout = cout.index(petit)
     return petit_cout
@@ -25,11 +30,14 @@ def petit_noeud(L,N):
 def parcourir_graphe(L,N):
     parcours = []
     indice_prec =[]
+    ancien = -1
     indice  = petit_noeud(L,N)
     indice_prec.append(indice)
-    parcours.append('->'+ str(indice))
+    parcours.append(str(indice))
     nbr_noeud = 1
+    cout = 0
     while nbr_noeud != N:
+        ancien = indice_prec[-1]
         noeud = L[indice]
         if noeud == []:
             indice = indice_prec[-retour]
@@ -39,23 +47,25 @@ def parcourir_graphe(L,N):
 
 
         else:
-            faible_cout = petit_cout(noeud)
+            faible_cout = petit_cout(noeud,ancien)
             indice_prec.append(indice)
             indice = noeud[faible_cout][0]
             if str(indice) not in parcours:
+                print("je passe par", indice)
+                cout += noeud[faible_cout][1]
                 nbr_noeud += 1
-                print(parcours)
                 parcours.append('-> ')
                 parcours.append(str(indice))
 
             else:
                 parcours.append('<->')
+                print("je passe en retour par ",indice)
                 parcours.append(str(indice))
             del L[indice_prec[-1]][faible_cout]
             retour = 1
 
 
 
-    return parcours
+    return parcours,cout
 
 
