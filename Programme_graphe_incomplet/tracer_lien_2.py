@@ -1,4 +1,5 @@
 from copy import deepcopy
+import Programme_graphe_incomplet.creer_resultat as cr
 
 def petit_cout(liste,ancien):
     cout = []
@@ -16,7 +17,6 @@ def petit_cout(liste,ancien):
 def petit_noeud(L,N):
     noeud = []
     l_neuf = deepcopy(L)
-    print('l_neuf avant modif :',l_neuf)
     for i,j in enumerate(l_neuf):
         if j == []:
             l_neuf[i] = [1 for _ in range(N)]
@@ -30,7 +30,6 @@ def petit_noeud(L,N):
 def parcourir_graphe(L,N):
     parcours = []
     indice_prec =[]
-    ancien = -1
     indice  = petit_noeud(L,N)
     indice_prec.append(indice)
     parcours.append(str(indice))
@@ -51,7 +50,6 @@ def parcourir_graphe(L,N):
             indice_prec.append(indice)
             indice = noeud[faible_cout][0]
             if str(indice) not in parcours:
-                print("je passe par", indice)
                 cout += noeud[faible_cout][1]
                 nbr_noeud += 1
                 parcours.append('-> ')
@@ -59,13 +57,12 @@ def parcourir_graphe(L,N):
 
             else:
                 parcours.append('<->')
-                print("je passe en retour par ",indice)
                 parcours.append(str(indice))
             del L[indice_prec[-1]][faible_cout]
             retour = 1
 
 
 
-    return parcours,cout
+    cr.resul(parcours,cout,N)
 
 
