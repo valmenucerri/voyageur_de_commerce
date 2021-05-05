@@ -3,8 +3,9 @@ Créer un fichier .net qui contient des données aléatoires
 '''
 
 import random as r
+import sys
 
-N = 10  # A changer comme désiré
+N = int(sys.argv[-1])
 
 
 with open('exemple_graphe/exemple{}.net'.format(N), 'w') as t:
