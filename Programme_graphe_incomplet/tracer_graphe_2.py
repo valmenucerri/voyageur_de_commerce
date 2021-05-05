@@ -9,13 +9,13 @@ def trouver_milieu(pt1,pt2):
     return milieu
 
 def tracer_graphe(L,N):
-    x = [r.randrange(0,N*2,2) for i in range(N)]
-    y = [r.randrange(0,N*2,2) for y in range(N)]
+    x = [r.randrange(0,N*4,3) for i in range(N)]
+    y = [r.randrange(0,N*4,3) for y in range(N)]
     coordonnees = lp.coord_pt(x,y)
-    plt.xlim(-3,N*2+3)
-    plt.ylim(-3,N*2+3)
+    plt.xlim(-3,N*4)
+    plt.ylim(-3,N*4)
     for pt in range (N):
-        plt.scatter(x[pt],y[pt],s=N*5)
-        plt.text(x[pt]-(3/N),y[pt]-(3/N),str(pt))
+        plt.scatter(x[pt],y[pt],s=N*7,color = 'orange')
+        plt.text(x[pt]-1,y[pt]-1,str(pt))
 
     plt.show()
