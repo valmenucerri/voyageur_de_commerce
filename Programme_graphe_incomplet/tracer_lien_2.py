@@ -47,21 +47,24 @@ def parcourir_graphe(L,N):
     :return: None
 
     '''
+    l_new = deepcopy(L)
     parcours = [] #créer le parcours final
     indice_prec =[] #créer la liste de tous les indices parcourus
-    indice  = petit_noeud(L,N)
+    indice  = petit_noeud(l_new,N)
     indice_prec.append(indice)
     parcours.append(str(indice))
     nbr_noeud = 1 #créer un compteur du nombre de noeusds traités
+    retour = 1
     cout = 0
     while nbr_noeud != N:
         ancien_noeud = indice_prec[-1]
-        noeud = L[indice]
+        noeud = l_new[indice]
         if noeud == []:   #considérer le noeud précédent si l'actuel n'a pas d'arête autre que la dernière empruntée
             indice = indice_prec[-retour]
             retour += 1  #considérer les noeuds précédents jusqu'à avoir un noeud ayant un arête inexplorée
             if retour >= len(indice_prec):
-                indice = petit_noeud(L, N)
+                indice = petit_noeud(l_new, N)
+
 
 
         else:
@@ -77,12 +80,13 @@ def parcourir_graphe(L,N):
             else:
                 parcours.append('<->')
                 parcours.append(str(indice))
-            del L[indice_prec[-1]][ind_faible_cout]
+            del l_new[indice_prec[-1]][ind_faible_cout]
             retour = 1
 
 
     validite = verifier_passage(parcours,N) #vérifier une dernière fois que tous les noeuds ont été parcourus
     cr.resul(parcours,cout,N,validite)
+    return parcours
 
 
 def verifier_passage(parcours,N):
@@ -101,3 +105,23 @@ def verifier_passage(parcours,N):
         return True
     else:
         return False
+
+
+def grand_noeud(L,N):
+    '''
+    Trouver le noeud qui possède le minimum d'arêtes dans le graphe
+    :param L: la liste représentant le graphe . type : list
+    :param N: la dimension du graphe, son nombre total de noeud. type : int
+    :return: petit_noeud: l'indice du noeud ayant le moins d'arête. type : int
+    '''
+    noeud = [] #créer une liste contenant le nombre d'arête par noeud
+    l_neuf = deepcopy(L) #copier la liste de liste pour ne pas la modifier
+    for i,j in enumerate(l_neuf):
+        if j == []:
+            l_neuf[i] = [1 for _ in range(N)] #ajouter une liste de taille N, pour éviter que la liste vide sot considérée comme le noeud avec le moins d'arêtes
+            noeud.append(N)
+        else:
+            noeud.append(len(j))
+    grand = max(noeud)
+    grand_noeud = noeud.index(grand)
+    return grand_noeud

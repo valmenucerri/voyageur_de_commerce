@@ -13,5 +13,8 @@ if '__main__' == __name__:
     graphe = gr.recup_fichier(sys.argv)
     N = gr.nbr_noeud(graphe)
     L = gr.analyser_graphe(graphe,N)
-    tg2.tracer_graphe(L,N)
+
+
     parcours = lp2.parcourir_graphe(L,N)
+    tg2.tracer_graphe(L, N,parcours)
+
