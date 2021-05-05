@@ -15,7 +15,7 @@ def tracer_graphe(L,N):
     plt.xlim(-3,N*2+3)
     plt.ylim(-3,N*2+3)
     for pt in range (N):
-        plt.scatter(N/2+((-1)^N)*pt,N/2+((-1)^N)*pt,s=N*5)
+        plt.scatter(x[pt],y[pt],s=N*5)
         plt.text(x[pt]-(3/N),y[pt]-(3/N),str(pt))
 
     plt.show()
