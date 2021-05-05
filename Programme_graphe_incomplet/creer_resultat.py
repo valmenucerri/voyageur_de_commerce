@@ -7,7 +7,7 @@ def resul(parcours,cout,N,validite):
     :param validite: True si tous les noeuds ont été parcoursus, False sinon. type : bool
     :return: None
     '''
-    with open("Résultats/exemple{}parcours.txt".format(N),'w') as fichier:
+    with open("Résultats_parcours/exemple{}parcours.txt".format(N),'w') as fichier:
         for i in parcours:
             fichier.write(i)
         fichier.write("\n"+ "Le coût total du voyage est :"+ str(cout))

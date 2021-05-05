@@ -32,17 +32,15 @@ def analyser_graphe(graphe,N):
     '''
     L = [[] for i in range (N)]
     with open("exemple_graphe/"+graphe,'r') as fichier:
-        n_ligne = 0
         for ligne in fichier:
             ligne1 = ligne.split()
-            n_ligne += 1
             if len(ligne1) == 3:  # Traiter chaque valeur sauf la première, qui est N la dimension du graphe
                 couple1 = int(ligne1[0])
                 couple2 = int(ligne1[1])
                 couple3 = int(ligne1[2])
                 if 0 <= couple1 <= N and 0 <= couple2 <= N:
                     L[couple1].append((couple2,couple3))
-                    L[couple2].append((couple1, couple3))
+                    L[couple2].append((couple1, couple3)) #Ajouter le lien opposé , si A va vers B, alors B va vers A
 
             elif len(ligne1) == 0:  # Ne pas considérer les lignes vides
                 pass
