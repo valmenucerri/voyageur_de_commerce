@@ -27,7 +27,7 @@ def petit_noeud(L,N):
     :param N: la dimension du graphe, son nombre total de noeud. type : int
     :return: petit_noeud: l'indice du noeud ayant le moins d'arête. type : int
     '''
-    noeud = []
+    noeud = [] #créer une liste contenant le nombre d'arête par noeud
     l_neuf = deepcopy(L) #copier la liste de liste pour ne pas la modifier
     for i,j in enumerate(l_neuf):
         if j == []:
@@ -40,19 +40,26 @@ def petit_noeud(L,N):
     return petit_noeud
 
 def parcourir_graphe(L,N):
-    parcours = []
-    indice_prec =[]
+    '''
+    Déterminer le parcours le mins coûteux pour parcourir tous les noeuds.
+    :param L: le graphe. type : list
+    :param N: la dimension du graphe, nombre de noeuds. type : int
+    :return: None
+
+    '''
+    parcours = [] #créer le parcours final
+    indice_prec =[] #créer la liste de tous les indices parcourus
     indice  = petit_noeud(L,N)
     indice_prec.append(indice)
     parcours.append(str(indice))
-    nbr_noeud = 1
+    nbr_noeud = 1 #créer un compteur du nombre de noeusds traités
     cout = 0
     while nbr_noeud != N:
         ancien_noeud = indice_prec[-1]
         noeud = L[indice]
-        if noeud == []:
+        if noeud == []:   #considérer le noeud précédent si l'actuel n'a pas d'arête autre que la dernière empruntée
             indice = indice_prec[-retour]
-            retour += 1
+            retour += 1  #considérer les noeuds précédents jusqu'à avoir un noeud ayant un arête inexplorée
             if retour >= len(indice_prec):
                 indice = petit_noeud(L, N)
 
@@ -60,10 +67,10 @@ def parcourir_graphe(L,N):
         else:
             ind_faible_cout = petit_cout(noeud,ancien_noeud)
             indice_prec.append(indice)
-            indice = noeud[ind_faible_cout][0]
+            indice = noeud[ind_faible_cout][0] #trouver l'indice du noeud suivant, déterminer grâce à ind_faible_cout
             if str(indice) not in parcours:
                 cout += noeud[ind_faible_cout][1]
-                nbr_noeud += 1
+                nbr_noeud += 1 #rajouter 1 au compteur de noeud, car un nouveau noeud non-exploré est ajouté au parcours
                 parcours.append('-> ')
                 parcours.append(str(indice))
 
@@ -74,11 +81,17 @@ def parcourir_graphe(L,N):
             retour = 1
 
 
-    validite = verifier_passage(parcours,N)
+    validite = verifier_passage(parcours,N) #vérifier une dernière fois que tous les noeuds ont été parcourus
     cr.resul(parcours,cout,N,validite)
 
 
 def verifier_passage(parcours,N):
+    '''
+    Vérifier que tous les noeuds du graphe ont été parcourus à la fin du parcours.
+    :param parcours: le parcours final. type : list
+    :param N: la dimension du graphe. type : int
+    :return: True si tous les noeuds ont été parcourus, False sinon. type : bool
+    '''
     valide = 0
     for _ in range(N):
         if str(_) in parcours:
