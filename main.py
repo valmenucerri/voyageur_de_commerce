@@ -3,7 +3,7 @@ Executer le programme avec n le nombre de points voulu
 '''
 from Programme import trace_graphe as g, lier_points as lp
 import sys
-from Programme_graphe_incomplet import tracer_lien_2 as lp2,traiter_graphe as gr
+from Programme_graphe_incomplet import tracer_lien_2 as lp2,traiter_graphe as gr,tracer_graphe_2 as tg2
 if '__main__' == __name__:
     '''n = int(sys.argv[-1])
     x,y = g.creer_pt(n)
@@ -13,4 +13,5 @@ if '__main__' == __name__:
     graphe = gr.recup_fichier(sys.argv)
     N = gr.nbr_noeud(graphe)
     L = gr.analyser_graphe(graphe,N)
+    tg2.tracer_graphe(L,N)
     parcours = lp2.parcourir_graphe(L,N)
